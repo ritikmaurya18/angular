@@ -1,0 +1,48 @@
+@if (isLoginPage || !isAuthenticated) {
+  <router-outlet />
+} @else {
+  <div class="flex h-screen bg-gray-50">
+    <app-sidebar [collapsed]="sidebarCollapsed" (toggleCollapse)="toggleSidebar()" />
+
+    <div class="flex-1 flex flex-col overflow-hidden">
+      <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 shrink-0">
+        <h1 class="text-xl font-bold text-gray-900">{{ appName }}</h1>
+
+        <div class="relative">
+          <button
+            (click)="toggleUserMenu()"
+            class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
+          >
+            <span class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
+              {{ currentUser?.name?.charAt(0) || 'U' }}
+            </span>
+            <span class="text-sm font-medium text-gray-700 hidden sm:block">{{ currentUser?.name }}</span>
+            <span class="text-gray-400 text-xs">▼</span>
+          </button>
+
+          @if (showUserMenu) {
+            <div class="absolute right-0 top-full mt-1 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-50">
+              <div class="px-4 py-2 border-b border-gray-100">
+                <p class="text-sm font-medium text-gray-800">{{ currentUser?.name }}</p>
+                <p class="text-xs text-gray-500">{{ currentUser?.email }}</p>
+              </div>
+              <a routerLink="/profile" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
+                👤 Profile
+              </a>
+              <button
+                (click)="logout()"
+                class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+              >
+                🚪 Logout
+              </button>
+            </div>
+          }
+        </div>
+      </header>
+
+      <main class="flex-1 overflow-auto p-6">
+        <router-outlet />
+      </main>
+    </div>
+  </div>
+}

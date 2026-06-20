@@ -1,0 +1,70 @@
+<div
+  class="bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-all group"
+  [class.opacity-60]="todo.status === 'completed'"
+  [class.border-l-4]="true"
+  [class.border-l-red-500]="todo.priority === 'high'"
+  [class.border-l-yellow-500]="todo.priority === 'medium'"
+  [class.border-l-green-500]="todo.priority === 'low'"
+>
+  <div class="flex items-start gap-3">
+    <button
+      (click)="toggleStatus.emit(todo.id)"
+      class="mt-1 w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors shrink-0"
+      [class]="{
+        'border-green-500 bg-green-500 text-white': todo.status === 'completed',
+        'border-blue-500 bg-blue-500 text-white': todo.status === 'in-progress',
+        'border-gray-300 hover:border-gray-400': todo.status === 'pending'
+      }"
+      aria-label="Toggle status"
+    >
+      @if (todo.status === 'completed') {
+        <span class="text-xs">✓</span>
+      } @else if (todo.status === 'in-progress') {
+        <span class="text-xs">⟳</span>
+      }
+    </button>
+
+    <div class="flex-1 min-w-0">
+      <div class="flex items-center gap-2 flex-wrap">
+        <a
+          [routerLink]="['/todos', todo.id]"
+          class="font-semibold text-gray-900 hover:text-blue-600 transition-colors truncate"
+          [class.line-through]="todo.status === 'completed'"
+        >
+          {{ todo.title }}
+        </a>
+        <span class="text-xs px-2 py-0.5 rounded-full border" [ngClass]="priorityClasses">
+          {{ todo.priority | titlecase }}
+        </span>
+        <span class="text-xs px-2 py-0.5 rounded-full" [ngClass]="statusClasses">
+          {{ statusLabel }}
+        </span>
+      </div>
+
+      @if (todo.description) {
+        <p class="text-sm text-gray-500 mt-1 line-clamp-2">{{ todo.description }}</p>
+      }
+
+      <div class="flex items-center gap-3 mt-2 text-xs text-gray-400">
+        <span [class.text-red-500]="isOverdue" [class.font-semibold]="isOverdue">
+          📅 {{ todo.dueDate }}
+          @if (isOverdue) { (Overdue) }
+        </span>
+        @if (categoryName) {
+          <span class="flex items-center gap-1">
+            <span class="w-2 h-2 rounded-full" [style.background]="categoryColor"></span>
+            {{ categoryName }}
+          </span>
+        }
+      </div>
+    </div>
+
+    <button
+      (click)="delete.emit(todo.id)"
+      class="opacity-0 group-hover:opacity-100 p-1 text-gray-400 hover:text-red-500 transition-all"
+      aria-label="Delete todo"
+    >
+      🗑️
+    </button>
+  </div>
+</div>

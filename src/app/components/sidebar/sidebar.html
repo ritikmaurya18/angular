@@ -1,0 +1,35 @@
+<aside
+  class="flex flex-col h-full bg-gray-900 text-white transition-all duration-300"
+  [class.w-64]="!collapsed"
+  [class.w-16]="collapsed"
+>
+  <div class="flex items-center justify-between p-4 border-b border-gray-700">
+    @if (!collapsed) {
+      <span class="text-lg font-bold">TODO App</span>
+    }
+    <button
+      (click)="toggleCollapse.emit()"
+      class="p-1 rounded hover:bg-gray-700 transition-colors"
+      aria-label="Toggle sidebar"
+    >
+      <span class="text-xl">{{ collapsed ? '☰' : '✕' }}</span>
+    </button>
+  </div>
+
+  <nav class="flex-1 py-4">
+    @for (item of navItems; track item.route) {
+      <a
+        [routerLink]="item.route"
+        routerLinkActive="bg-blue-600"
+        [routerLinkActiveOptions]="{ exact: item.route === '/' }"
+        class="flex items-center gap-3 px-4 py-3 mx-2 rounded-lg hover:bg-gray-800 transition-colors"
+        [class.justify-center]="collapsed"
+      >
+        <span class="text-xl">{{ item.icon }}</span>
+        @if (!collapsed) {
+          <span>{{ item.label }}</span>
+        }
+      </a>
+    }
+  </nav>
+</aside>

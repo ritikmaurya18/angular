@@ -1,0 +1,28 @@
+<div class="max-w-2xl mx-auto space-y-6">
+  <h1 class="text-2xl font-bold text-gray-900">Categories</h1>
+
+  <div class="bg-white rounded-xl border border-gray-200 p-6">
+    <h2 class="text-lg font-semibold mb-4">Manage Categories</h2>
+    <app-category-manager
+      [categories]="categories"
+      (addCategory)="onAdd($event)"
+      (updateCategory)="onUpdate($event)"
+      (deleteCategory)="onDelete($event)"
+    />
+  </div>
+
+  <div class="bg-white rounded-xl border border-gray-200 p-6">
+    <h2 class="text-lg font-semibold mb-4">Category Stats</h2>
+    <div class="space-y-3">
+      @for (cat of categories; track cat.id) {
+        <div class="flex items-center gap-3">
+          <span class="w-3 h-3 rounded-full" [style.background]="cat.color"></span>
+          <span class="flex-1 font-medium text-gray-800">{{ cat.name }}</span>
+          <span class="text-sm text-gray-500">{{ categoryTodoCounts[cat.id] || 0 }} todo(s)</span>
+        </div>
+      } @empty {
+        <p class="text-gray-400 text-center py-4">No categories yet.</p>
+      }
+    </div>
+  </div>
+</div>
