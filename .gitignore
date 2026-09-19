@@ -42,3 +42,18 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+# added by agent-cli
+*.tsbuildinfo
+build/
+.next/
+target/
+__pycache__/
+.venv/
+*.log
+.cli/blueprint/
+.cli/answers/
+.env
+.env.*
+!.env.example
+.pgdata/
