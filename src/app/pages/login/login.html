@@ -1,60 +1,78 @@
-<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
-  <div class="w-full max-w-md">
-    <div class="text-center mb-8">
-      <h1 class="text-4xl font-bold text-gray-900">{{ appName }}</h1>
-      <p class="text-gray-500 mt-2">Sign in to manage your tasks</p>
+<main class="min-h-screen bg-slate-50 px-5 py-10 text-slate-900 sm:px-8">
+  <div class="mx-auto flex min-h-[calc(100vh-5rem)] w-full max-w-sm flex-col justify-center">
+    <div class="mb-8">
+      <div class="mb-6 flex h-11 w-11 items-center justify-center rounded-xl bg-slate-900 shadow-sm" aria-hidden="true">
+        <span class="h-5 w-1.5 rounded-full bg-white"></span>
+        <span class="ml-1.5 h-3.5 w-1.5 rounded-full bg-slate-400"></span>
+      </div>
+      <p class="mb-2 text-sm font-semibold tracking-wide text-slate-500">WELCOME BACK</p>
+      <h1 class="text-3xl font-semibold tracking-tight">Sign in to {{ appName }}</h1>
+      <p class="mt-2 text-sm leading-6 text-slate-500">A quieter way to keep your day on track.</p>
     </div>
 
-    <div class="bg-white rounded-2xl shadow-lg p-8">
+    <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_12px_35px_rgba(15,23,42,0.06)] sm:p-7">
       <form (ngSubmit)="onLogin()" class="space-y-5">
         @if (error) {
-          <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+          <div class="rounded-lg border border-red-200 bg-red-50 px-3.5 py-3 text-sm text-red-700" role="alert">
             {{ error }}
           </div>
         }
 
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+          <label for="email" class="mb-1.5 block text-sm font-medium text-slate-700">Email address</label>
           <input
+            id="email"
             type="email"
             [(ngModel)]="email"
             name="email"
             required
-            placeholder="admin@example.com"
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
+            autocomplete="email"
+            placeholder="you@example.com"
+            class="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10"
           />
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+          <div class="mb-1.5 flex items-center justify-between">
+            <label for="password" class="block text-sm font-medium text-slate-700">Password</label>
+            <span class="text-xs text-slate-400">Keep it secure</span>
+          </div>
           <input
+            id="password"
             type="password"
             [(ngModel)]="password"
             name="password"
             required
-            placeholder="password123"
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
+            autocomplete="current-password"
+            placeholder="Enter your password"
+            class="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10"
           />
         </div>
 
         <button
           type="submit"
           [disabled]="loading || !email || !password"
-          class="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium text-lg"
+          class="flex w-full items-center justify-center rounded-lg bg-slate-900 py-3 text-sm font-semibold text-white transition hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-40"
         >
           @if (loading) {
             <span class="inline-flex items-center gap-2">
-              <span class="animate-spin">⟳</span> Signing in...
+              <span class="animate-spin text-base">⟳</span> Signing in...
             </span>
           } @else {
-            Sign In
+            Continue
+            <span class="ml-2 text-slate-400" aria-hidden="true">→</span>
           }
         </button>
       </form>
 
-      <div class="mt-6 pt-4 border-t border-gray-200 text-center text-sm text-gray-500">
-        Demo: <span class="font-mono text-gray-700">admin&#64;example.com</span> / <span class="font-mono text-gray-700">password123</span>
+      <div class="mt-6 border-t border-slate-100 pt-4 text-center text-xs text-slate-400">
+        Demo access:
+        <span class="font-mono text-slate-500">admin&#64;example.com</span>
+        <span class="mx-1">·</span>
+        <span class="font-mono text-slate-500">password123</span>
       </div>
     </div>
+
+    <p class="mt-6 text-center text-xs text-slate-400">Simple tasks. Clear progress.</p>
   </div>
-</div>
+</main>
