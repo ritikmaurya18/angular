@@ -1,5 +1,5 @@
 <aside
-  class="flex flex-col h-full bg-red-500 text-gray-900 transition-all duration-300"
+  class="flex flex-col h-full bg-slate-500 text-gray-900 transition-all duration-300"
   [class.w-64]="!collapsed"
   [class.w-16]="collapsed"
 >
@@ -9,7 +9,7 @@
     }
     <button
       (click)="toggleCollapse.emit()"
-      class="p-1 rounded hover:bg-red-600 transition-colors"
+      class="p-1 rounded hover:bg-slate-600 transition-colors"
       aria-label="Toggle sidebar"
     >
       <span class="text-xl">{{ collapsed ? '☰' : '✕' }}</span>
@@ -20,9 +20,9 @@
     @for (item of navItems; track item.route) {
       <a
         [routerLink]="item.route"
-        routerLinkActive="bg-red-700"
+        routerLinkActive="bg-slate-700"
         [routerLinkActiveOptions]="{ exact: item.route === '/' }"
-        class="flex items-center gap-3 px-4 py-3 mx-2 rounded-lg hover:bg-red-600 transition-colors"
+        class="flex items-center gap-3 px-4 py-3 mx-2 rounded-lg hover:bg-slate-600 transition-colors"
         [class.justify-center]="collapsed"
       >
         <span class="text-xl">{{ item.icon }}</span>
